@@ -55,7 +55,7 @@ router.put('/api/order/:id', async (req, res) => {
 	console.log(id)
 	console.log(order)
 	try {
-		const result = await Order.findOneAndUpdate( { id: id }, order, { new: true });
+		const result = await Order.findByIdAndUpdate( id, order, { new: true });
 		if (!order)
 			return res
 				.status(404)
@@ -74,7 +74,7 @@ router.delete('/api/order/delete/:id', async (req, res) => {
 
 	try {
 		// Delete records based on the provided collection name
-		await Order.findOneAndDelete({ id });
+		await Order.findByIdAndDelete(id);
 		ws.send(JSON.stringify({type: "update_request"}))
 		res.json({ message: 'Records deleted successfully' });
 	} catch (error) {
