@@ -38,8 +38,8 @@ router.get('/api/order', async (req, res) => {
 router.post('/api/order', async (req, res) => {
 	try {
 		const {id,order}=req.body
-		const order = await Order.create({id,order});
-		res.json(order);
+		const new_order = await Order.create({id,order});
+		res.json(new_order);
 		ws.send(JSON.stringify({type: "update_request"}))
 	} catch (err) {
 		console.error('Error creating order:', err);
