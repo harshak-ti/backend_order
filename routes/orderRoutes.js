@@ -37,7 +37,8 @@ router.get('/api/order', async (req, res) => {
 // Add a new todo item
 router.post('/api/order', async (req, res) => {
 	try {
-		const order = await Order.create(req.body);
+		const {id,order}=req.body
+		const order = await Order.create({id,order});
 		res.json(order);
 		ws.send(JSON.stringify({type: "update_request"}))
 	} catch (err) {
